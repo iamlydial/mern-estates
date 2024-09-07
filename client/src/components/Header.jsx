@@ -1,4 +1,4 @@
-import React from "react";
+import { FaSearch } from "react-icons/fa";
 
 const Header = () => {
   return (
@@ -8,9 +8,19 @@ const Header = () => {
           <span className="text-slate-500">Mern</span>
           <span className="text-slate-700">Estate</span>
         </h1>
-        <form className="bg-slate-100 p-3 rounded-lg">
-          <input className="bg-transparent" type="text" placeholder="Search..." />
+        <form className="flex bg-slate-100 p-3 rounded-lg items-center">
+          <input
+            className="bg-transparent focus:outline-none w-24 sm:w-64"
+            type="text"
+            placeholder="Search..."
+          />
+          <FaSearch className="text-slate-600"/>
         </form>
+        <ul className="flex gap-4">
+            <li className="hidden sm:inline">Home</li>
+            <li>About</li>
+            <li>Sign in</li>
+        </ul>
       </div>
     </header>
   );
