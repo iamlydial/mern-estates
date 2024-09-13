@@ -11,7 +11,6 @@ import {
 const Signin = () => {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -38,7 +37,6 @@ const Signin = () => {
 
       if (data.success === false) {
         dispatch(signInFailure(data.message));
-
         return;
       }
       dispatch(signInSuccess(data));
