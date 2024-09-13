@@ -7,8 +7,10 @@ import { PersistGate } from "redux-persist/integration/react";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
+    {/* Provide the Redux store to the application */}
     <PersistGate loading={null} persistor={persistor}>
-      <App />
+      {/* Delay rendering until the Redux Persist has rehydrated the state */}
+      <App /> {/* Render the main App component */}
     </PersistGate>
   </Provider>
 );
