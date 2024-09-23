@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getDownloadURL,
@@ -109,7 +109,6 @@ const Profile = () => {
   };
 
   const handleSignOutUser = async () => {
-    
     try {
       dispatch(logOutUserStart());
       const res = await fetch("/api/auth/signout", {
@@ -121,7 +120,7 @@ const Profile = () => {
         dispatch(logOutUserFailure(data.message));
         return;
       }
-      dispatch(logOutUserSuccess(data))
+      dispatch(logOutUserSuccess(data));
     } catch (error) {
       dispatch(logOutUserFailure(error.message));
     }
@@ -185,6 +184,12 @@ const Profile = () => {
         >
           {loading ? "Loading" : "Update"}
         </button>
+        <Link
+          className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
+          to={"/create-listing"}
+        >
+          Create Listing
+        </Link>
       </form>
 
       <div className="flex justify-between mt-5">
