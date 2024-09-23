@@ -12,21 +12,30 @@ const CreateListing = () => {
   const [formData, setFormData] = useState({
     imageUrls: [],
   });
+  const [imageUploadError, setImageUploadError] = useState(false);
+
   console.log(files, "files");
   console.log(formData, "Form Data");
 
   const handleImageSubmit = (e) => {
-    if (files.length > 0 && files.length < 7) {
+    if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       const promises = [];
       for (let i = 0; i < files.length; i++) {
         promises.push(storeImage(files[i]));
       }
-      Promise.all(promises).then((urls) => {
-        setFormData({
-          ...formData,
-          imageUrls: formData.imageUrls.concat(urls),
+      Promise.all(promises)
+        .then((urls) => {
+          setFormData({
+            ...formData,
+            imageUrls: formData.imageUrls.concat(urls),
+          });
+          setImageUploadError(false);
+        })
+        .catch((err) => {
+          setImageUploadError("Image Upload Failed (2 MB max per image)");
         });
-      });
+    } else {
+      setImageUploadError("You can only upload 6 images per listing");
     }
   };
 
@@ -203,6 +212,22 @@ const CreateListing = () => {
               Upload
             </button>
           </div>
+          <p className="text-red-700 text-sm">
+            {imageUploadError && imageUploadError}
+          </p>
+          {formData.imageUrls.length > 0 &&
+            formData.imageUrls.map((url) => (
+              <div className="flex justify-between p-3 border items-center">
+                <img
+                  src={url}
+                  alt="listing image"
+                  className="w-30 h-20 object-contain rounded-lg"
+                />
+                <button className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75">
+                  Delete
+                </button>
+              </div>
+            ))}
           <button className="p-3 bg-slate-700 text-white uppercase rounded-lg hover:opacity-95 disabled:opacity-80">
             Create Listing
           </button>
