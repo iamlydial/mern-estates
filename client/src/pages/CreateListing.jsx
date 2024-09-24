@@ -13,12 +13,15 @@ const CreateListing = () => {
     imageUrls: [],
   });
   const [imageUploadError, setImageUploadError] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   console.log(files, "files");
   console.log(formData, "Form Data");
 
   const handleImageSubmit = (e) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
+      setUploading(true);
+      setImageUploadError(false);
       const promises = [];
       for (let i = 0; i < files.length; i++) {
         promises.push(storeImage(files[i]));
@@ -30,12 +33,14 @@ const CreateListing = () => {
             imageUrls: formData.imageUrls.concat(urls),
           });
           setImageUploadError(false);
+          setUploading(false);
         })
         .catch((err) => {
           setImageUploadError("Image Upload Failed (2 MB max per image)");
         });
     } else {
       setImageUploadError("You can only upload 6 images per listing");
+      setUploading(false);
     }
   };
 
@@ -61,6 +66,13 @@ const CreateListing = () => {
           });
         }
       );
+    });
+  };
+
+  const handleRemoveImage = (index) => {
+    setFormData({
+      ...formData,
+      imageUrls: formData.imageUrls.filter((_, i) => i !== index),
     });
   };
 
@@ -206,24 +218,32 @@ const CreateListing = () => {
             />
             <button
               type="button"
+              disabled={uploading}
               onClick={handleImageSubmit}
               className="p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80"
             >
-              Upload
+              {uploading ? "Uploading..." : "Upload"}
             </button>
           </div>
           <p className="text-red-700 text-sm">
             {imageUploadError && imageUploadError}
           </p>
           {formData.imageUrls.length > 0 &&
-            formData.imageUrls.map((url) => (
-              <div className="flex justify-between p-3 border items-center">
+            formData.imageUrls.map((url, index) => (
+              <div
+                key={url}
+                className="flex justify-between p-3 border items-center"
+              >
                 <img
                   src={url}
                   alt="listing image"
                   className="w-30 h-20 object-contain rounded-lg"
                 />
-                <button className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75">
+                <button
+                  type="button"
+                  onClick={() => handleRemoveImage(index)}
+                  className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75"
+                >
                   Delete
                 </button>
               </div>
