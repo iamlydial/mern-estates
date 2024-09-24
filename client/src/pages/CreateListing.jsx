@@ -295,23 +295,25 @@ const CreateListing = () => {
                   <span className="text-xs">($ / month)</span>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <input
-                  type="number"
-                  name="discountedPrice"
-                  id="discountedPrice"
-                  min="50"
-                  max="1000000"
-                  required
-                  className="p-3 border border-gray-300 rounded-lg"
-                  onChange={handleChange}
-                  value={formData.discountedPrice}
-                />
-                <div className="flex flex-col items-center">
-                  <p>Discounted Price</p>
-                  <span className="text-xs">($ / month)</span>
+              {formData.offer && (
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+                    name="discountedPrice"
+                    id="discountedPrice"
+                    min="50"
+                    max="1000000"
+                    required
+                    className="p-3 border border-gray-300 rounded-lg"
+                    onChange={handleChange}
+                    value={formData.discountedPrice}
+                  />
+                  <div className="flex flex-col items-center">
+                    <p>Discounted Price</p>
+                    <span className="text-xs">($ / month)</span>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
