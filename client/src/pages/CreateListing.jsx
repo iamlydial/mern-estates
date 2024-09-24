@@ -20,7 +20,7 @@ const CreateListing = () => {
     bedrooms: 1,
     bathrooms: 1,
     regularPrice: 50,
-    discountedPrice: 50,
+    discountedPrice: 0,
     offer: false,
     sale: false,
     parking: false,
@@ -301,7 +301,7 @@ const CreateListing = () => {
                     type="number"
                     name="discountedPrice"
                     id="discountedPrice"
-                    min="50"
+                    min="0"
                     max="1000000"
                     required
                     className="p-3 border border-gray-300 rounded-lg"
