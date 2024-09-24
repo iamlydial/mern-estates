@@ -7,6 +7,7 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CreateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -30,6 +31,7 @@ const CreateListing = () => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   console.log(files, "files");
   console.log(formData, "Form Data");
@@ -148,6 +150,7 @@ const CreateListing = () => {
         setError(data.message);
         setLoading(false);
       }
+      navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
     }
