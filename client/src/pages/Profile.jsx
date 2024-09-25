@@ -149,6 +149,8 @@ const Profile = () => {
     }
   };
 
+  const handleDeleteUserListing = () => {};
+
   return (
     <div className="p-3 max-w-lg mx-auto ">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -264,7 +266,12 @@ const Profile = () => {
                 <p className="">{listing.name}</p>
               </Link>
               <div className="flex flex-col items-center">
-                <button className="text-red-700 uppercase">Delete</button>
+                <button
+                  onClick={handleDeleteUserListing}
+                  className="text-red-700 uppercase"
+                >
+                  Delete
+                </button>
                 <button className="text-green-700 uppercase">Edit</button>
               </div>
             </div>
