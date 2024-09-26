@@ -146,7 +146,7 @@ const UpdateListing = () => {
         return setError("Discounted price must be lower than Regular price");
       setLoading(true);
       setError(false);
-      const res = await fetch("/api/listing/create", {
+      const res = await fetch(`/api/listing/update/${params.listingId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
