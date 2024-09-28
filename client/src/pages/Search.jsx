@@ -6,7 +6,9 @@ const Search = () => {
       <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen">
         <form className="flex flex-col gap-8">
           <div className="flex items-center gap-2">
-            <label className="whitespace-nowrap">Search Term:</label>
+            <label className="whitespace-nowrap font-semibold">
+              Search Term:
+            </label>
             <input
               type="text"
               name=""
@@ -16,7 +18,7 @@ const Search = () => {
             />
           </div>
           <div className="flex gap-2 flex-wrap items-center">
-            <label>Type:</label>
+            <label className="font-semibold">Type:</label>
             <div className="flex gap-2">
               <input type="checkbox" id="all" className="w-5" />
               <span>Rent & Sale</span>
@@ -36,7 +38,7 @@ const Search = () => {
           </div>
 
           <div className="flex gap-2 flex-wrap items-center">
-            <label>Amenities:</label>
+            <label className="font-semibold">Amenities:</label>
             <div className="flex gap-2">
               <input type="checkbox" id="parking" className="w-5" />
               <span>Parking</span>
@@ -47,7 +49,7 @@ const Search = () => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <label>Sort:</label>
+            <label className="font-semibold">Sort:</label>
             <select id="sort_order" className="border rounded-lg p-3">
               <option>Price high to low</option>
               <option>Price low to high</option>
@@ -55,10 +57,15 @@ const Search = () => {
               <option>Oldest</option>
             </select>
           </div>
+          <button className="bg-slate-700 p-3 rounded-lg uppercase text-white hover:opacity-95">
+            Search
+          </button>
         </form>
       </div>
-      <div>
-        <h1>Listing Results:</h1>
+      <div className="">
+        <h1 className="text-3xl font-semibold border-b p-3 text-slate-700 mt-5">
+          Listing Results:
+        </h1>
       </div>
     </div>
   );
