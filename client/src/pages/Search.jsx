@@ -46,6 +46,15 @@ const Search = () => {
               <span>Furnished</span>
             </div>
           </div>
+          <div className="flex items-center gap-2">
+            <label>Sort:</label>
+            <select id="sort_order" className="border rounded-lg p-3">
+              <option>Price high to low</option>
+              <option>Price low to high</option>
+              <option>Latest</option>
+              <option>Oldest</option>
+            </select>
+          </div>
         </form>
       </div>
       <div>
