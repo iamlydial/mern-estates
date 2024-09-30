@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ListingCard from "../components/ListingCard";
 
 const Search = () => {
   const [sidebarData, setSidebarData] = useState({
@@ -66,11 +67,11 @@ const Search = () => {
       e.target.id === "rent" ||
       e.target.id === "sale"
     ) {
-      setSidebardata({ ...sidebardata, type: e.target.id });
+      setSidebarData({ ...sidebarData, type: e.target.id });
     }
 
     if (e.target.id === "searchTerm") {
-      setSidebardata({ ...sidebardata, searchTerm: e.target.value });
+      setSidebarData({ ...sidebarData, searchTerm: e.target.value });
     }
 
     if (
@@ -78,8 +79,8 @@ const Search = () => {
       e.target.id === "furnished" ||
       e.target.id === "offer"
     ) {
-      setSidebardata({
-        ...sidebardata,
+      setSidebarData({
+        ...sidebarData,
         [e.target.id]:
           e.target.checked || e.target.checked === "true" ? true : false,
       });
@@ -90,7 +91,7 @@ const Search = () => {
 
       const order = e.target.value.split("_")[1] || "desc";
 
-      setSidebardata({ ...sidebardata, sort, order });
+      setSidebarData({ ...sidebarData, sort, order });
     }
   };
 
@@ -212,10 +213,24 @@ const Search = () => {
           </button>
         </form>
       </div>
-      <div className="">
+      <div className="flex-1">
         <h1 className="text-3xl font-semibold border-b p-3 text-slate-700 mt-5">
           Listing Results:
         </h1>
+        <div className="p-7 flex flex-wrap gap-4">
+          {!loading && listings.length === 0 && (
+            <p className="text-slate-700 text-xl">No Listing found!</p>
+          )}
+          {loading && (
+            <p className="text-xl text-slate-700 text-center w-full">
+              Loading...
+            </p>
+          )}
+          {!loading &&
+            listings &&
+            listings.map((listing) => <ListingCard key={listing._id}  listing={listing} />)}
+
+        </div>
       </div>
     </div>
   );
