@@ -23,6 +23,8 @@ const Home = () => {
       </div>
       {/* swiper */}
 
+      
+
       {/* listing result for offer sale and reny */}
     </div>
   );
