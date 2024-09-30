@@ -6,7 +6,6 @@ const ListingCard = ({ listing }) => {
   return (
     <div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]">
       <Link to={`/listing/${listing._id}`}>
-        ListingCard {listing.name}
         <img
           className="h-[320px] sm:h-[220px] w-full object-cover hover:scale-105 transition-scale duration-300 "
           src={listing.imageUrls[0]}
@@ -28,10 +27,12 @@ const ListingCard = ({ listing }) => {
           </p>
           <p className="text-slate-500 mt-2 font-semibold ">
             $
-            {listing.offer
+            {listing.offer && listing.discountedPrice
               ? listing.discountedPrice.toLocaleString("en-US")
-              : listing.regularprice.toLocaleString("en-US")}
-            {listing.type === "rent" && "/ month"}
+              : listing.regularPrice
+              ? listing.regularPrice.toLocaleString("en-US")
+              : "N/A"}
+            {listing.type === "rent" && " / month"}
           </p>
           <div className="text-slate-700 flex gap-4">
             <div className="font-bold text-xs ">
